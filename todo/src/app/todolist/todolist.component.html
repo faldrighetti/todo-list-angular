@@ -2,14 +2,30 @@
   <h1>To-Do App</h1>
   <hr>
 
-  <form>
+  <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
       <div class="form-group">
         <label for="ejemploTarea">Tarea</label>
-        <input type="text" class="form-control" id="tarea" aria-describedby="tarea" placeholder="Ingresar tarea">
+        <input type="text" class="form-control" id="tarea" placeholder="Ingresar tarea" ngModel name="Tarea">
         <small id="error" class="form-text text-danger">Campo requerido</small>
       </div>     
       <button id="boton-enviar" type="submit" class="btn btn-primary">Enviar</button>
   </form>
   <hr>
 
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Tarea</th>
+        <th scope="col">Completada</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarea of arrayTareas">
+        <td>{{tarea.nombreTarea}}</td>
+        <td><input id="checkbox" type="checkbox"></td>
+        <td><button class="btn btn-danger btn-sm">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
