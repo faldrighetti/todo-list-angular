@@ -8,12 +8,7 @@ import { NgForm } from '@angular/forms';
 })
 export class TodolistComponent {
 
-  arrayTareas =[{nombreTarea: 'Lavar la ropa', esCompleta: false}]; 
-
-  constructor(){ }
-
-  ngOnInit():void {
-  }
+  arrayTareas: { nombreTarea: string; esCompleta: boolean; }[] = [];
 
   onSubmit(form: NgForm){
     console.log(form);
@@ -22,5 +17,18 @@ export class TodolistComponent {
       nombreTarea: form.controls['Tarea'].value,
       esCompleta: false
     });
+
+    form.reset();
+  }
+
+  onDelete(index: number){
+    console.log(index);
+
+    this.arrayTareas.splice(index, 1);
+  }
+
+  onCheck(index: number){
+    console.log(this.arrayTareas);
+    this.arrayTareas[index].esCompleta = !this.arrayTareas[index].esCompleta;
   }
 }

@@ -5,10 +5,17 @@
   <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
       <div class="form-group">
         <label for="ejemploTarea">Tarea</label>
-        <input type="text" class="form-control" id="tarea" placeholder="Ingresar tarea" ngModel name="Tarea">
-        <small id="error" class="form-text text-danger">Campo requerido</small>
+        <input type="text"
+        class="form-control"
+        id="tarea" placeholder="Ingresar tarea"
+        ngModel name="Tarea"
+        required>
+        <small *ngIf="taskForm.invalid && taskForm.dirty" id="error" class="form-text text-danger">Campo requerido</small>
       </div>     
-      <button id="boton-enviar" type="submit" class="btn btn-primary">Enviar</button>
+      <button [disabled]="taskForm.invalid"
+      id="boton-enviar"
+      type="submit"
+      class="btn btn-primary">Enviar</button>
   </form>
   <hr>
 
@@ -21,10 +28,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let tarea of arrayTareas">
+      <tr *ngFor="let tarea of arrayTareas; index as i">
         <td>{{tarea.nombreTarea}}</td>
-        <td><input id="checkbox" type="checkbox"></td>
-        <td><button class="btn btn-danger btn-sm">Eliminar</button></td>
+        <td><input (change)="onCheck(i)" id="checkbox" type="checkbox"></td>
+        <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Eliminar</button></td>
       </tr>
     </tbody>
   </table>
